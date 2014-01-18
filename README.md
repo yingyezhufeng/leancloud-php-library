@@ -5,52 +5,54 @@ Forked from
 ## SETUP
 =========================
 
-**Instructions** after cloning this repository you have to create a file in the root of it called **parseConfig.php**
+checkout这个项目后，你需要在项目根路径创建一个文件名为`AVConfig.php`作为配置文件。
 
-## sample of AVConfig.php ###
+## AVConfig.php示范
 
-Below is what you want parseConfig.php to look like, just fill in your IDs and KEYs to get started.
+填写AVConfig.php配置示范如下：
 
 ```
 <?php
 
-class parseConfig{
+class AVConfig{
 
-	const APPID = '';
-	const MASTERKEY = '';
-	const RESTKEY = '';
-	const PARSEURL = 'https://api.parse.com/1/';
+    const APPID = '';
+    const MASTERKEY = '';
+    const APPKEY = '';
+    const AVOSCLOUDURL = 'https://cn.avoscloud.com/1/';
 }
 
 ?>
 
+其中APPID就是应用Id，MasterKey为应用的Master Key，APPKEY为应用Key。这些信息都可以在应用设置的应用key菜单里找到。
+
 ```
 
-
-
-EXAMPLE
+## 简单例子
 =========================
+
+更多例子参考tests目录下的测试用例，更多文档等待补充。
 
 ### sample of upload.php ###
 
 ```
 <?php
-    //This example is a sample video upload stored in parse
+    //上传视频到AVOS Cloud的简单例子。
 
-    $parse = new parseObject('Videos');
-    $parse->title = $data['upload_data']['title'];
-    $parse->description = $data['upload_data']['description'];
-    $parse->tags = $data['upload_data']['tags'];
+    $obj = new AVObject('Videos');
+    $obj->title = $data['upload_data']['title'];
+    $obj->description = $data['upload_data']['description'];
+    $obj->tags = $data['upload_data']['tags'];
 
     //create new geo
-    $geo = new parseGeoPoint($data['upload_data']['lat'],$data['upload_data']['lng']);
-    $parse->location = $geo->location;
+    $geo = new AVGeoPoint($data['upload_data']['lat'],$data['upload_data']['lng']);
+    $obj->location = $geo->location;
 
     //use pointer to other class
-    $parse->userid = array("__type" => "Pointer", "className" => "_User", "objectId" => $data['upload_data']['userid']);
+    $obj->userid = array("__type" => "Pointer", "className" => "_User", "objectId" => $data['upload_data']['userid']);
 
     //create acl
-    $parse->ACL = array("*" => array("write" => true, "read" => true));
-    $r = $parse->save();
+    $obj->ACL = array("*" => array("write" => true, "read" => true));
+    $r = $obj->save();
     ?>
 ```
