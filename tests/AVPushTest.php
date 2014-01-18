@@ -7,8 +7,8 @@ class AVPushTest extends \Enhance\TestFixture {
 	public function sendWithGlobalMessageExpectTrue(){
 		$AVPush = \Enhance\Core::getCodeCoverageWrapper('AVPush', array( 'Global message to be sent out right away' ));
 		$return = $AVPush->send();
-				
-		\Enhance\Assert::isTrue( $return );
+		//print_r($return);
+		\Enhance\Assert::isObject( $return );
 	}
 
 	public function sendWithDataExpectTrue(){
@@ -24,7 +24,7 @@ class AVPushTest extends \Enhance\TestFixture {
 		$AVPush->type = 'ios';
 		$AVPush->badge = 538; //ios only
 		$AVPush->sound = 'cheer'; //ios only
-		$AVPush->content_available = 1; //ios only - for newsstand applications. Also, changed from content-available to content_available. 
+		$AVPush->content_available = 1; //ios only - for newsstand applications. Also, changed from content-available to content_available.
 		//$AVPush->title = 'test notification title'; //android only - gives title to the notification
 
 		//CUSTOM DATA CAN BE SENT VERY EASILY ALONG WITH YOUR NOTIFICATION MESSAGE AND CAN BE ACCESSED PROGRAMATICALLY VIA THE MOBILE DEVICE... JUST DON'T SET NAMES THE SAME AS RESERVERD ONES MENTIONED ABOVE
@@ -32,7 +32,7 @@ class AVPushTest extends \Enhance\TestFixture {
 
 		$return = $AVPush->send();
 
-		\Enhance\Assert::isTrue( $return );
+		\Enhance\Assert::isObject( $return );
 	}
 
 }

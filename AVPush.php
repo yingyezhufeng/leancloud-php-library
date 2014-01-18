@@ -17,11 +17,11 @@ class AVPush extends AVRestClient{
 		if($globalMsg != ''){
 			$this->_globalMsg = $globalMsg;
 		}
-		
+
 		parent::__construct();
 
 	}
-	
+
 	public function __set($name,$value){
 		if($name != 'channel' || $name != 'channels' || $name != 'expiration_time' || $name != 'expiration_interval' || $name != 'type' || $name != 'data' || $name != 'where'){
 			$this->data[$name] = $value;
@@ -55,7 +55,7 @@ class AVPush extends AVRestClient{
 						'data' => $this->data
 					)
 				);
-				
+
 				if(!empty($this->channels)){
 					$params['data']['channels'] = $this->channels;
 				}
@@ -70,7 +70,7 @@ class AVPush extends AVRestClient{
 				}
 				if(!empty($this->content_available)){
 					//changed back to content-available... underscores are much easier to deal with in PHP
-					$params['data']['content-available'] = $this->content_available;
+					$params['data']['content_available'] = $this->content_available;
 				}
 				if(!empty($this->type)){
 					$params['data']['type'] = $this->type;
@@ -78,7 +78,7 @@ class AVPush extends AVRestClient{
 				if(!empty($this->where)){
 					$params['data']['where'] = $this->where;
 				}
-				
+
 				$request = $this->request($params);
 				return $request;
 

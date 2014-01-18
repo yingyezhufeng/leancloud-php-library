@@ -2,6 +2,7 @@
 
 class AVFile extends AVRestClient{
 
+    private $id;
 	private $_fileName;
 	private $_contentType;
 
@@ -10,7 +11,7 @@ class AVFile extends AVRestClient{
 			$this->_contentType = $contentType;
 			$this->data = $data;
 		}
-		
+
 		parent::__construct();
 
 	}
@@ -23,6 +24,7 @@ class AVFile extends AVRestClient{
 				'contentType' => $this->_contentType,
 				'data' => $this->data,
 			));
+			$id = $request->objectId;
 			return $request;
 		}
 		else{
