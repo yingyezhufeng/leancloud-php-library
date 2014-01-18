@@ -1,31 +1,31 @@
 <?php
-include 'parseConfig.php';
-include 'parseObject.php';
-include 'parseQuery.php';
-include 'parseUser.php';
-include 'parseFile.php';
-include 'parsePush.php';
-include 'parseGeoPoint.php';
-include 'parseACL.php';
-include 'parseCloud.php';
+include 'AVConfig.php';
+include 'AVObject.php';
+include 'AVQuery.php';
+include 'AVUser.php';
+include 'AVFile.php';
+include 'AVPush.php';
+include 'AVGeoPoint.php';
+include 'AVACL.php';
+include 'AVCloud.php';
 
-class parseRestClient{
+class AVRestClient{
 
 	private $_appid = '';
 	private $_masterkey = '';
 	private $_restkey = '';
-	private $_parseurl = '';
+	private $_AVurl = '';
 
 	public $data;
 	public $requestUrl = '';
 	public $returnData = '';
 
 	public function __construct(){
-		$parseConfig = new parseConfig;
-		$this->_appid = $parseConfig::APPID;
-    	$this->_masterkey = $parseConfig::MASTERKEY;
-    	$this->_restkey = $parseConfig::RESTKEY;
-    	$this->_parseurl = $parseConfig::PARSEURL;
+		$AVConfig = new AVConfig;
+		$this->_appid = $AVConfig::APPID;
+    	$this->_masterkey = $AVConfig::MASTERKEY;
+    	$this->_restkey = $AVConfig::RESTKEY;
+    	$this->_AVurl = $AVConfig::PARSEURL;
 
 		if(empty($this->_appid) || empty($this->_restkey) || empty($this->_masterkey)){
 			$this->throwError('You must set your Application ID, Master Key and REST API Key');
@@ -49,7 +49,7 @@ class parseRestClient{
 		$isFile = false;
 		$c = curl_init();
 		curl_setopt($c, CURLOPT_TIMEOUT, 30);
-		curl_setopt($c, CURLOPT_USERAGENT, 'parse.com-php-library/2.0');
+		curl_setopt($c, CURLOPT_USERAGENT, 'AV.com-php-library/2.0');
 		curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($c, CURLINFO_HEADER_OUT, true);
 		if(substr($args['requestUrl'],0,5) == 'files'){
@@ -77,7 +77,7 @@ class parseRestClient{
 			));	
 		}
 		curl_setopt($c, CURLOPT_CUSTOMREQUEST, $args['method']);
-		$url = $this->_parseurl . $args['requestUrl'];
+		$url = $this->_AVurl . $args['requestUrl'];
 
 		if($args['method'] == 'PUT' || $args['method'] == 'POST'){
 			if($isFile){
@@ -183,7 +183,7 @@ class parseRestClient{
 	}
 
 	private function checkResponse($response,$responseCode,$expectedCode){
-		//TODO: Need to also check for response for a correct result from parse.com
+		//TODO: Need to also check for response for a correct result from AV.com
 		if(!in_array($responseCode,$expectedCode)){
 			$error = json_decode($response);
 			$this->throwError($error->error,$error->code);
@@ -203,9 +203,9 @@ class parseRestClient{
 
 class ParseLibraryException extends Exception{
 	public function __construct($message, $code = 0, Exception $previous = null) {
-		//codes are only set by a parse.com error
+		//codes are only set by a AV.com error
 		if($code != 0){
-			$message = "parse.com error: ".$message;
+			$message = "AV.com error: ".$message;
 		}
 
 		parent::__construct($message, $code, $previous);

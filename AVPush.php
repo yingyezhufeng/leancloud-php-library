@@ -1,6 +1,6 @@
 <?php
 
-class parsePush extends parseRestClient{
+class AVPush extends AVRestClient{
 
 	public $channels;
 	public $channel;

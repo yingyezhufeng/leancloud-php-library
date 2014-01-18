@@ -1,6 +1,6 @@
 <?php
 
-class parseQuery extends parseRestClient{
+class AVQuery extends AVRestClient{
 	private $_limit = 100;
 	private $_skip = 0;
 	private $_count = 0;
@@ -16,7 +16,7 @@ class parseQuery extends parseRestClient{
 			$this->_requestUrl = 'classes/'.$class;
 		}
 		else{
-			$this->throwError('include the className when creating a parseQuery');
+			$this->throwError('include the className when creating a AVQuery');
 		}
 		
 		parent::__construct();
@@ -83,7 +83,7 @@ class parseQuery extends parseRestClient{
 			$this->_limit = $int;
 		}
 		else{
-			$this->throwError('parse requires the limit parameter be between 1 and 1000');
+			$this->throwError('AV requires the limit parameter be between 1 and 1000');
 		}
 	}
 
@@ -111,7 +111,7 @@ class parseQuery extends parseRestClient{
 			$this->_order[] = '-'.$value;
 		}
 		else{
-			$this->throwError('the order parameter on parseQuery must be a string');
+			$this->throwError('the order parameter on AVQuery must be a string');
 		}
 	}
 	
@@ -120,7 +120,7 @@ class parseQuery extends parseRestClient{
 			$this->_include[] = $value;
 		}
 		else{
-			$this->throwError('the include parameter on parseQuery must be a string');
+			$this->throwError('the include parameter on AVQuery must be a string');
 		}
 	}
 

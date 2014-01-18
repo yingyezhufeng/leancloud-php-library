@@ -1,6 +1,6 @@
 <?php
 
-class parseObject extends parseRestClient{
+class AVObject extends AVRestClient{
 	public $_includes = array();
 	private $_className = '';
 
@@ -9,7 +9,7 @@ class parseObject extends parseRestClient{
 			$this->_className = $class;
 		}
 		else{
-			$this->throwError('include the className when creating a parseObject');
+			$this->throwError('include the className when creating a AVObject');
 		}
 
 		parent::__construct();

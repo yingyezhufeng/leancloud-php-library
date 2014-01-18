@@ -1,6 +1,6 @@
 <?php
 
-class parseFile extends parseRestClient{
+class AVFile extends AVRestClient{
 
 	private $_fileName;
 	private $_contentType;
@@ -30,11 +30,11 @@ class parseFile extends parseRestClient{
 		}
 	}
 
-	public function delete($parseFileName){
-		if($parseFileName != ''){
+	public function delete($AVFileName){
+		if($AVFileName != ''){
 			$request = $this->request(array(
 				'method' => 'DELETE',
-				'requestUrl' => 'files/'.$parseFileName,
+				'requestUrl' => 'files/'.$AVFileName,
 				'contentType' => $this->_contentType,
 			));
 			return $request;

@@ -1,7 +1,7 @@
 <?php
 /*
-	// Adding the possibility to run parse cloud code functions
-	$cloud = new parseCloud("functionName");
+	// Adding the possibility to run AV cloud code functions
+	$cloud = new AVCloud("functionName");
 	// Setting the params
 	$cloud->__set('action',1234);
 	$cloud->__set('identifier',"aZ02fe2a");
@@ -9,7 +9,7 @@
 	$result = $cloud->run();
 	print_r($result);
 */
-class parseCloud extends parseRestClient{
+class AVCloud extends AVRestClient{
 	public $_options;
 	private $_functionName = '';
 
@@ -19,7 +19,7 @@ class parseCloud extends parseRestClient{
 			$this->_functionName = $function; 
 		}
 		else{
-			$this->throwError('include the functionName when creating a parseCloud');
+			$this->throwError('include the functionName when creating a AVCloud');
 		}
 
 		parent::__construct();

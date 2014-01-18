@@ -1,6 +1,6 @@
 <?php
 
-class parseGeoPoint extends parseRestClient{
+class AVGeoPoint extends AVRestClient{
 
 	public $lat;
 	public $long;

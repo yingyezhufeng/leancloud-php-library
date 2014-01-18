@@ -1,6 +1,6 @@
 <?php
 
-class parseUser extends parseRestClient{
+class AVUser extends AVRestClient{
 
 	public $authData;
 
@@ -81,7 +81,7 @@ public function socialLogin(){
 		}
 		
 	}
-	//TODO: should make the parseUser contruct accept the objectId and update and delete would only require the sessionToken
+	//TODO: should make the AVUser contruct accept the objectId and update and delete would only require the sessionToken
 	public function update($objectId,$sessionToken){
 		if(!empty($objectId) || !empty($sessionToken)){
 			$request = $this->request(array(
