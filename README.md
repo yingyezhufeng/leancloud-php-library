@@ -1,11 +1,18 @@
 ## PHP AVOS Cloud Library
 ===========================
-Forked from
+Forked from https://github.com/apotropaic/parse.com-php-library
+
+AVOS Cloud PHP SDK。
 
 ## SETUP
 =========================
 
 checkout这个项目后，你需要在项目根路径创建一个文件名为`AVConfig.php`作为配置文件。
+
+```
+git clone https://github.com/killme2008/avoscloud-php-library.git
+cd avoscloud-php-library ; touch AVConfig.php
+```
 
 ## AVConfig.php示范
 
@@ -23,10 +30,12 @@ class AVConfig{
 }
 
 ?>
+```
 
 其中APPID就是应用Id，MasterKey为应用的Master Key，APPKEY为应用Key。这些信息都可以在应用设置的应用key菜单里找到。
 
-```
+你可以通过`php test.php`命令运行单元测试。
+
 
 ## 简单例子
 =========================
