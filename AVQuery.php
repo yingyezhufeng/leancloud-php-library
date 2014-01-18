@@ -18,7 +18,7 @@ class AVQuery extends AVRestClient{
 		else{
 			$this->throwError('include the className when creating a AVQuery');
 		}
-		
+
 		parent::__construct();
 
 	}
@@ -52,7 +52,7 @@ class AVQuery extends AVRestClient{
 			if($this->_count == 1){
 				$urlParams['count'] = '1';
 			}
-
+			//print_r($urlParams);
 			$request = $this->request(array(
 				'method' => 'GET',
 				'requestUrl' => $this->_requestUrl,
@@ -69,7 +69,7 @@ class AVQuery extends AVRestClient{
   	}
 		else{
 			$this->throwError('setCount requires a boolean paremeter');
-		}		
+		}
   }
 
 	public function getCount(){
@@ -114,7 +114,7 @@ class AVQuery extends AVRestClient{
 			$this->throwError('the order parameter on AVQuery must be a string');
 		}
 	}
-	
+
 	public function whereInclude($value){
 		if(is_string($value)){
 			$this->_include[] = $value;
@@ -133,7 +133,7 @@ class AVQuery extends AVRestClient{
 			$this->_query[$key] = $value;
 		}
 		else{
-			$this->throwError('the $key and $value parameters must be set when setting a "where" query method');		
+			$this->throwError('the $key and $value parameters must be set when setting a "where" query method');
 		}
 	}
 
@@ -142,9 +142,9 @@ class AVQuery extends AVRestClient{
 			$this->_query[$key] = array(
 				'$ne' => $value
 			);
-		}	
+		}
 		else{
-			$this->throwError('the $key and $value parameters must be set when setting a "where" query method');		
+			$this->throwError('the $key and $value parameters must be set when setting a "where" query method');
 		}
 	}
 
@@ -154,11 +154,11 @@ class AVQuery extends AVRestClient{
 			$this->_query[$key] = array(
 				'$gt' => $value
 			);
-		}	
-		else{
-			$this->throwError('the $key and $value parameters must be set when setting a "where" query method');		
 		}
-	
+		else{
+			$this->throwError('the $key and $value parameters must be set when setting a "where" query method');
+		}
+
 	}
 
 	public function whereLessThan($key,$value){
@@ -166,11 +166,11 @@ class AVQuery extends AVRestClient{
 			$this->_query[$key] = array(
 				'$lt' => $value
 			);
-		}	
-		else{
-			$this->throwError('the $key and $value parameters must be set when setting a "where" query method');		
 		}
-	
+		else{
+			$this->throwError('the $key and $value parameters must be set when setting a "where" query method');
+		}
+
 	}
 
 	public function whereGreaterThanOrEqualTo($key,$value){
@@ -178,11 +178,11 @@ class AVQuery extends AVRestClient{
 			$this->_query[$key] = array(
 				'$gte' => $value
 			);
-		}	
-		else{
-			$this->throwError('the $key and $value parameters must be set when setting a "where" query method');		
 		}
-	
+		else{
+			$this->throwError('the $key and $value parameters must be set when setting a "where" query method');
+		}
+
 	}
 
 	public function whereLessThanOrEqualTo($key,$value){
@@ -190,11 +190,11 @@ class AVQuery extends AVRestClient{
 			$this->_query[$key] = array(
 				'$lte' => $value
 			);
-		}	
-		else{
-			$this->throwError('the $key and $value parameters must be set when setting a "where" query method');		
 		}
-	
+		else{
+			$this->throwError('the $key and $value parameters must be set when setting a "where" query method');
+		}
+
 	}
 
 	public function whereAll($key,$value){
@@ -202,16 +202,16 @@ class AVQuery extends AVRestClient{
 			if(is_array($value)){
 				$this->_query[$key] = array(
 					'$all' => $value
-				);		
+				);
 			}
 			else{
-				$this->throwError('$value must be an array to check through');		
+				$this->throwError('$value must be an array to check through');
 			}
-		}	
-		else{
-			$this->throwError('the $key and $value parameters must be set when setting a "where" query method');		
 		}
-	
+		else{
+			$this->throwError('the $key and $value parameters must be set when setting a "where" query method');
+		}
+
 	}
 
 
@@ -220,16 +220,16 @@ class AVQuery extends AVRestClient{
 			if(is_array($value)){
 				$this->_query[$key] = array(
 					'$in' => $value
-				);		
+				);
 			}
 			else{
-				$this->throwError('$value must be an array to check through');		
+				$this->throwError('$value must be an array to check through');
 			}
-		}	
-		else{
-			$this->throwError('the $key and $value parameters must be set when setting a "where" query method');		
 		}
-	
+		else{
+			$this->throwError('the $key and $value parameters must be set when setting a "where" query method');
+		}
+
 	}
 
 	public function whereNotContainedIn($key,$value){
@@ -237,16 +237,16 @@ class AVQuery extends AVRestClient{
 			if(is_array($value)){
 				$this->_query[$key] = array(
 					'$nin' => $value
-				);		
+				);
 			}
 			else{
-				$this->throwError('$value must be an array to check through');		
+				$this->throwError('$value must be an array to check through');
 			}
-		}	
-		else{
-			$this->throwError('the $key and $value parameters must be set when setting a "where" query method');		
 		}
-	
+		else{
+			$this->throwError('the $key and $value parameters must be set when setting a "where" query method');
+		}
+
 	}
 
 	public function whereExists($key){
@@ -264,7 +264,7 @@ class AVQuery extends AVRestClient{
 			);
 		}
 	}
-	
+
 	public function whereRegex($key,$value,$options=''){
 		if(isset($key) && isset($value)){
 			$this->_query[$key] = array(
@@ -274,47 +274,47 @@ class AVQuery extends AVRestClient{
 			if(!empty($options)){
 				$this->_query[$key]['options'] = $options;
 			}
-		}	
-		else{
-			$this->throwError('the $key and $value parameters must be set when setting a "where" query method');		
 		}
-		
+		else{
+			$this->throwError('the $key and $value parameters must be set when setting a "where" query method');
+		}
+
 	}
 
 	public function wherePointer($key,$className,$objectId){
 		if(isset($key) && isset($className)){
 			$this->_query[$key] = $this->dataType('pointer', array($className,$objectId));
-		}	
-		else{
-			$this->throwError('the $key and $className parameters must be set when setting a "where" pointer query method');		
 		}
-		
+		else{
+			$this->throwError('the $key and $className parameters must be set when setting a "where" pointer query method');
+		}
+
 	}
 
 	public function whereInQuery($key,$className,$inQuery){
 		if(isset($key) && isset($className)){
+		  $inQuery['className'] = $className;
 			$this->_query[$key] = array(
 				'$inQuery' => $inQuery,
-				'className' => $className
 			);
-		}	
-		else{
-			$this->throwError('the $key and $value parameters must be set when setting a "where" query method');		
 		}
-		
+		else{
+			$this->throwError('the $key and $value parameters must be set when setting a "where" query method');
+		}
+
 	}
 
 	public function whereNotInQuery($key,$className,$inQuery){
 		if(isset($key) && isset($className)){
+		  $inQuery['className'] = $className;
 			$this->_query[$key] = array(
 				'$notInQuery' => $inQuery,
-				'className' => $className
 			);
-		}	
-		else{
-			$this->throwError('the $key and $value parameters must be set when setting a "where" query method');		
 		}
-		
+		else{
+			$this->throwError('the $key and $value parameters must be set when setting a "where" query method');
+		}
+
 	}
 }
 

@@ -13,7 +13,7 @@ class AVRestClient{
 
 	private $_appid = '';
 	private $_masterkey = '';
-	private $_restkey = '';
+	private $_apikey = '';
 	private $_AVurl = '';
 
 	public $data;
@@ -24,57 +24,57 @@ class AVRestClient{
 		$AVConfig = new AVConfig;
 		$this->_appid = $AVConfig::APPID;
     	$this->_masterkey = $AVConfig::MASTERKEY;
-    	$this->_restkey = $AVConfig::RESTKEY;
-    	$this->_AVurl = $AVConfig::PARSEURL;
+    	$this->_apikey = $AVConfig::APIKEY;
+    	$this->_AVurl = $AVConfig::AVOSCLOUDURL;
 
-		if(empty($this->_appid) || empty($this->_restkey) || empty($this->_masterkey)){
-			$this->throwError('You must set your Application ID, Master Key and REST API Key');
+		if(empty($this->_appid) || empty($this->_apikey) || empty($this->_masterkey)){
+			$this->throwError('You must set your Application ID, Master Key and Application API Key');
 		}
 
 		$version = curl_version();
 		$ssl_supported = ( $version['features'] & CURL_VERSION_SSL );
 
 		if(!$ssl_supported){
-			$this->throwError('CURL ssl support not found');	
+			$this->throwError('CURL ssl support not found');
 		}
 
 	}
 
 	/*
 	 * All requests go through this function
-	 * 
 	 *
-	 */	
+	 *
+	 */
 	public function request($args){
 		$isFile = false;
 		$c = curl_init();
 		curl_setopt($c, CURLOPT_TIMEOUT, 30);
-		curl_setopt($c, CURLOPT_USERAGENT, 'AV.com-php-library/2.0');
+		curl_setopt($c, CURLOPT_USERAGENT, 'AVOSCloud.com-php-library/2.0');
 		curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($c, CURLINFO_HEADER_OUT, true);
 		if(substr($args['requestUrl'],0,5) == 'files'){
 			curl_setopt($c, CURLOPT_HTTPHEADER, array(
 				'Content-Type: '.$args['contentType'],
-				'X-Parse-Application-Id: '.$this->_appid,
-				'X-Parse-Master-Key: '.$this->_masterkey
+				'X-AVOSCloud-Application-Id: '.$this->_appid,
+				'X-AVOSCloud-Master-Key: '.$this->_masterkey
 			));
 			$isFile = true;
 		}
 		else if(substr($args['requestUrl'],0,5) == 'users' && isset($args['sessionToken'])){
 			curl_setopt($c, CURLOPT_HTTPHEADER, array(
     			'Content-Type: application/json',
-    			'X-Parse-Application-Id: '.$this->_appid,
-    			'X-Parse-REST-API-Key: '.$this->_restkey,
-    			'X-Parse-Session-Token: '.$args['sessionToken']
+    			'X-AVOSCloud-Application-Id: '.$this->_appid,
+    			'X-AVOSCloud-Application-API-Key: '.$this->_apikey,
+    			'X-AVOSCloud-Session-Token: '.$args['sessionToken']
     		));
 		}
 		else{
 			curl_setopt($c, CURLOPT_HTTPHEADER, array(
 				'Content-Type: application/json',
-				'X-Parse-Application-Id: '.$this->_appid,
-				'X-Parse-REST-API-Key: '.$this->_restkey,
-				'X-Parse-Master-Key: '.$this->_masterkey
-			));	
+				'X-AVOSCloud-Application-Id: '.$this->_appid,
+				'X-AVOSCloud-Application-Key: '.$this->_apikey,
+				'X-AVOSCloud-Master-Key: '.$this->_masterkey
+			));
 		}
 		curl_setopt($c, CURLOPT_CUSTOMREQUEST, $args['method']);
 		$url = $this->_AVurl . $args['requestUrl'];
@@ -86,7 +86,7 @@ class AVRestClient{
 			else{
 				$postData = json_encode($args['data']);
 			}
-			
+
 			curl_setopt($c, CURLOPT_POSTFIELDS, $postData );
 		}
 
@@ -112,11 +112,11 @@ class AVRestClient{
 			}
 		}
 
-		//BELOW HELPS WITH DEBUGGING		
+		//BELOW HELPS WITH DEBUGGING
 		/*
 		if(!in_array($responseCode,$expectedCode)){
 			//print_r($response);
-			//print_r($args);		
+			//print_r($args);
 		}
 		*/
 		return $this->checkResponse($response,$responseCode,$expectedCode);
@@ -135,27 +135,27 @@ class AVRestClient{
 					$return = array(
 						"__type" => "Bytes",
 						"base64" => base64_encode($params)
-					);			
+					);
 					break;
 				case 'pointer':
 					$return = array(
 						"__type" => "Pointer",
 						"className" => $params[0],
 						"objectId" => $params[1]
-					);			
+					);
 					break;
 				case 'geopoint':
 					$return = array(
 						"__type" => "GeoPoint",
 						"latitude" => floatval($params[0]),
 						"longitude" => floatval($params[1])
-					);			
+					);
 					break;
 				case 'file':
 					$return = array(
 						"__type" => "File",
 						"name" => $params[0],
-					);			
+					);
 					break;
 				case 'increment':
 					$return = array(
@@ -171,21 +171,45 @@ class AVRestClient{
 					break;
 				default:
 					$return = false;
-					break;	
+					break;
 			}
-			
+
 			return $return;
-		}	
+		}
 	}
 
 	public function throwError($msg,$code=0){
-		throw new ParseLibraryException($msg,$code);
+		throw new AVLibraryException($msg,$code);
 	}
 
+
+	function printStackTrace() {
+    $stack = debug_backtrace();
+    $output = 'Stack trace:' . PHP_EOL;
+
+    $stackLen = count($stack);
+    for ($i = 1; $i < $stackLen; $i++) {
+        $entry = $stack[$i];
+
+        $func = $entry['function'] . '(';
+        $argsLen = count($entry['args']);
+        for ($j = 0; $j < $argsLen; $j++) {
+            $func .= $entry['args'][$j];
+            if ($j < $argsLen - 1) $func .= ', ';
+        }
+        $func .= ')';
+
+        $output .= '#' . ($i - 1) . ' ' . $entry['file'] . ':' . $entry['line'] . ' - ' . $func . PHP_EOL;
+    }
+
+	print_r($output);
+}
+
 	private function checkResponse($response,$responseCode,$expectedCode){
-		//TODO: Need to also check for response for a correct result from AV.com
+		//TODO: Need to also check for response for a correct result from AVOSCloud.com
 		if(!in_array($responseCode,$expectedCode)){
 			$error = json_decode($response);
+			$this->printStackTrace();
 			$this->throwError($error->error,$error->code);
 		}
 		else{
@@ -201,11 +225,11 @@ class AVRestClient{
 }
 
 
-class ParseLibraryException extends Exception{
+class AVLibraryException extends Exception{
 	public function __construct($message, $code = 0, Exception $previous = null) {
-		//codes are only set by a AV.com error
+		//codes are only set by a AVOSCloud.com error
 		if($code != 0){
-			$message = "AV.com error: ".$message;
+			$message = "AVOSCloud.com error: ".$message;
 		}
 
 		parent::__construct($message, $code, $previous);

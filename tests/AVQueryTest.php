@@ -1,12 +1,12 @@
 <?php
 
 class AVQueryTest extends \Enhance\TestFixture {
-	
+
 	public $AVQuery;
 	public $AVQueryUser;
 	public $AVObject;
 	public $AVObject2;
-	
+
 	public function setUp(){
 		//setup test data to query
 		$AVObject = new AVObject('test');
@@ -14,7 +14,7 @@ class AVQueryTest extends \Enhance\TestFixture {
 		$AVObject->name = 'Foo';
 		$AVObject->mode = 'cheat';
 		$this->AVObject = $AVObject->save();
-		
+
 		$AVObject2 = new AVObject('test');
 		$AVObject2->score = 2222;
 		$AVObject2->name = 'Bar';
@@ -25,14 +25,14 @@ class AVQueryTest extends \Enhance\TestFixture {
 
 		$this->AVQuery = \Enhance\Core::getCodeCoverageWrapper('AVQuery', array('test'));
 		$this->AVQueryUser = \Enhance\Core::getCodeCoverageWrapper('AVQuery', array('users'));
-		
+
 	}
-	
+
 	public function findWithNameExpectResults(){
 		$AVQuery = $this->AVQuery;
 		$AVQuery->where('name','Foo');
 		$return = $AVQuery->find();
-		
+
 		\Enhance\Assert::isTrue( is_array($return->results) );
 	}
 
@@ -40,7 +40,7 @@ class AVQueryTest extends \Enhance\TestFixture {
 		$AVQuery = $this->AVQuery;
 		$AVQuery->whereNotEqualTo('name','Foo');
 		$return = $AVQuery->find();
-		
+
 		\Enhance\Assert::isTrue( is_array($return->results) );
 	}
 
@@ -48,7 +48,7 @@ class AVQueryTest extends \Enhance\TestFixture {
 		$AVQuery = $this->AVQuery;
 		$AVQuery->whereGreaterThan('score',1500);
 		$return = $AVQuery->find();
-		
+
 		\Enhance\Assert::isTrue( is_array($return->results) );
 	}
 
@@ -56,7 +56,7 @@ class AVQueryTest extends \Enhance\TestFixture {
 		$AVQuery = $this->AVQuery;
 		$AVQuery->whereLessThan('score',1500);
 		$return = $AVQuery->find();
-		
+
 		\Enhance\Assert::isTrue( is_array($return->results) );
 	}
 
@@ -64,7 +64,7 @@ class AVQueryTest extends \Enhance\TestFixture {
 		$AVQuery = $this->AVQuery;
 		$AVQuery->whereGreaterThanOrEqualTo('score',1111);
 		$return = $AVQuery->find();
-		
+
 		\Enhance\Assert::isTrue( is_array($return->results) );
 	}
 
@@ -72,7 +72,7 @@ class AVQueryTest extends \Enhance\TestFixture {
 		$AVQuery = $this->AVQuery;
 		$AVQuery->whereLessThanOrEqualTo('score',1111);
 		$return = $AVQuery->find();
-		
+
 		\Enhance\Assert::isTrue( is_array($return->results) );
 	}
 
@@ -80,7 +80,7 @@ class AVQueryTest extends \Enhance\TestFixture {
 		$AVQuery = $this->AVQuery;
 		$AVQuery->whereContainedIn('mode',array('cheat','test','mode'));
 		$return = $AVQuery->find();
-		
+
 		\Enhance\Assert::isTrue( is_array($return->results) );
 	}
 
@@ -88,7 +88,7 @@ class AVQueryTest extends \Enhance\TestFixture {
 		$AVQuery = $this->AVQuery;
 		$AVQuery->whereNotContainedIn('name',array('cheat','test','mode'));
 		$return = $AVQuery->find();
-		
+
 		\Enhance\Assert::isTrue( is_array($return->results) );
 	}
 
@@ -96,7 +96,7 @@ class AVQueryTest extends \Enhance\TestFixture {
 		$AVQuery = $this->AVQuery;
 		$AVQuery->whereExists('score');
 		$return = $AVQuery->find();
-		
+
 		\Enhance\Assert::isTrue( is_array($return->results) );
 	}
 
@@ -104,7 +104,7 @@ class AVQueryTest extends \Enhance\TestFixture {
 		$AVQuery = $this->AVQuery;
 		$AVQuery->whereDoesNotExist('score');
 		$return = $AVQuery->find();
-		
+
 		\Enhance\Assert::isTrue( is_array($return->results) );
 	}
 
@@ -112,7 +112,7 @@ class AVQueryTest extends \Enhance\TestFixture {
 		$AVQuery = $this->AVQuery;
 		$AVQuery->whereRegex('name','^\bF.*');
 		$return = $AVQuery->find();
-		
+
 		\Enhance\Assert::isTrue( is_array($return->results) );
 	}
 
@@ -122,7 +122,7 @@ class AVQueryTest extends \Enhance\TestFixture {
 			'name' => array('$exists' => true)
 		)));
 		$return = $AVQuery->find();
-		
+
 		\Enhance\Assert::isTrue( is_array($return->results) );
 	}
 
@@ -132,11 +132,11 @@ class AVQueryTest extends \Enhance\TestFixture {
 			'name' => array('$exists' => true)
 		)));
 		$return = $AVQuery->find();
-		
+
 		\Enhance\Assert::isTrue( is_array($return->results) );
 	}
 
-	
+
 
 
 }
