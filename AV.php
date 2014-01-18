@@ -186,7 +186,6 @@ class AVRestClient{
 		//TODO: Need to also check for response for a correct result from AVOSCloud.com
 		if(!in_array($responseCode,$expectedCode)){
 			$error = json_decode($response);
-			$this->printStackTrace();
 			$this->throwError($error->error,$error->code);
 		}
 		else{
