@@ -13,7 +13,7 @@ class AVRestClient{
 
 	private $_appid = '';
 	private $_masterkey = '';
-	private $_apikey = '';
+	private $_appkey = '';
 	private $_AVurl = '';
 
 	public $data;
@@ -24,11 +24,11 @@ class AVRestClient{
 		$AVConfig = new AVConfig;
 		$this->_appid = $AVConfig::APPID;
     	$this->_masterkey = $AVConfig::MASTERKEY;
-    	$this->_apikey = $AVConfig::APIKEY;
+    	$this->_appkey = $AVConfig::APPKEY;
     	$this->_AVurl = $AVConfig::AVOSCLOUDURL;
 
-		if(empty($this->_appid) || empty($this->_apikey) || empty($this->_masterkey)){
-			$this->throwError('You must set your Application ID, Master Key and Application API Key');
+		if(empty($this->_appid) || empty($this->_appkey) || empty($this->_masterkey)){
+			$this->throwError('You must set your Application ID, Master Key and Application Key');
 		}
 
 		$version = curl_version();
@@ -64,7 +64,7 @@ class AVRestClient{
 			curl_setopt($c, CURLOPT_HTTPHEADER, array(
     			'Content-Type: application/json',
     			'X-AVOSCloud-Application-Id: '.$this->_appid,
-    			'X-AVOSCloud-Application-API-Key: '.$this->_apikey,
+    			'X-AVOSCloud-Application-Key: '.$this->_appkey,
     			'X-AVOSCloud-Session-Token: '.$args['sessionToken']
     		));
 		}
@@ -72,7 +72,7 @@ class AVRestClient{
 			curl_setopt($c, CURLOPT_HTTPHEADER, array(
 				'Content-Type: application/json',
 				'X-AVOSCloud-Application-Id: '.$this->_appid,
-				'X-AVOSCloud-Application-Key: '.$this->_apikey,
+				'X-AVOSCloud-Application-Key: '.$this->_appkey,
 				'X-AVOSCloud-Master-Key: '.$this->_masterkey
 			));
 		}
