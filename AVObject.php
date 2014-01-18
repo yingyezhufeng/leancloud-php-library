@@ -38,11 +38,11 @@ class AVObject extends AVRestClient{
 				'method' => 'GET',
 				'requestUrl' => 'classes/'.$this->_className.'/'.$id
 			));
-			
+
 			if(!empty($this->_includes)){
 				$request['include'] = implode(',', $this->_includes);
 			}
-			
+
 			return $request;
 		}
 	}
@@ -59,11 +59,11 @@ class AVObject extends AVRestClient{
 		}
 	}
 
-	public function increment($field,$amount){
+	public function increment($field, $amount){
 		$this->data[$field] = $this->dataType('increment', $amount);
 	}
 
-	public function decrement($id){
+	public function decrement($field, $amount){
 		$this->data[$field] = $this->dataType('decrement', $amount);
 	}
 
@@ -76,7 +76,7 @@ class AVObject extends AVRestClient{
 			));
 
 			return $request;
-		}		
+		}
 	}
 
 	public function addInclude($name){
