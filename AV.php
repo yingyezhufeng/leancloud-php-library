@@ -154,7 +154,7 @@ class AVRestClient{
 				case 'file':
 					$return = array(
 						"__type" => "File",
-						"id" => $params[0],
+						"id" => $params,
 					);
 					break;
 				case 'increment':
