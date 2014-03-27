@@ -57,7 +57,7 @@ class AVConfig{
 	$obj->score = 1000;
 	$obj->name = 'dennis zhuang';
 	$save = $obj->save();
-	print_r($rsave);
+	print_r($save);
 ```
 
 更新对象：
