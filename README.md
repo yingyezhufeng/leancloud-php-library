@@ -26,7 +26,7 @@ class AVConfig{
     const APPID = '';
     const MASTERKEY = '';
     const APPKEY = '';
-    const AVOSCLOUDURL = 'https://cn.avoscloud.com/1/';
+    const AVOSCLOUDURL = 'https://leancloud.cn/1.1/';
 }
 
 ?>

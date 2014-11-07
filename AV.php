@@ -128,7 +128,7 @@ class AVRestClient{
 				case 'date':
 					$return = array(
 						"__type" => "Date",
-						"iso" => date("c", strtotime($params))
+						"iso" => date("c", strtotime($params." UTC"))
 					);
 					break;
 				case 'bytes':
