@@ -1,8 +1,8 @@
-## PHP AVOS Cloud Library
+## LeanCloud PHP Library
 ===========================
 Forked from https://github.com/apotropaic/parse.com-php-library
 
-AVOS Cloud PHP SDK。
+[LeanCloud](https://leancloud.cn)(原名AVOS Cloud) PHP SDK。
 
 ## 配置
 =========================
@@ -10,8 +10,8 @@ AVOS Cloud PHP SDK。
 checkout这个项目后，你需要在项目根路径创建一个文件名为`AVConfig.php`作为配置文件。
 
 ```
-git clone https://github.com/killme2008/avoscloud-php-library.git
-cd avoscloud-php-library ; touch AVConfig.php
+git clone https://github.com/killme2008/leancloud-php-library.git
+cd leancloud-php-library ; touch AVConfig.php
 ```
 
 ## AVConfig.php示范
