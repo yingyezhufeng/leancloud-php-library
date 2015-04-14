@@ -1,4 +1,4 @@
-<?php
+<?php namespace leancloudsdk;
 
 class AVPush extends AVRestClient{
 

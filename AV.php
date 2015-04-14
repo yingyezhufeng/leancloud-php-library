@@ -1,13 +1,13 @@
-<?php
-include 'AVConfig.php';
-include 'AVObject.php';
-include 'AVQuery.php';
-include 'AVUser.php';
-include 'AVFile.php';
-include 'AVPush.php';
-include 'AVGeoPoint.php';
-include 'AVACL.php';
-include 'AVCloud.php';
+<?php namespace leancloudsdk;
+require_once( 'AVConfig.php' );
+require_once( 'AVObject.php' );
+require_once( 'AVQuery.php' );
+require_once( 'AVUser.php' ) ;
+require_once( 'AVFile.php' );
+require_once( 'AVPush.php' );
+require_once( 'AVGeoPoint.php' );
+require_once( 'AVACL.php' );
+require_once( 'AVCloud.php' );
 
 class AVRestClient{
 

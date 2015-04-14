@@ -1,4 +1,4 @@
-<?php
+<?php namespace leancloudsdk;
 /* 
 // example: 
 $object = new AVObject();
