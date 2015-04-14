@@ -65,14 +65,14 @@ class AVConfig{
 ```
 	$updateObject = new AVObject('GameScore');
 	$updateObject->score = 2000;
-	$return = $updateObject->update($save->objectId);
+	$return = $updateObject->update($objectId);
 ```
 
 删除对象：
 
 ```
 	$deleteObject = new AVObject('GameScore');
-	$return = $deleteObject->delete($save->objectId);
+	$return = $deleteObject->delete($objectId);
 ```
 
 ### 查询
