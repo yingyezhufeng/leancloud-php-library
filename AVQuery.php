@@ -1,4 +1,4 @@
-<?php
+<?php namespace leancloudsdk;
 
 class AVQuery extends AVRestClient{
   private $_limit = 100;

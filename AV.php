@@ -1,13 +1,13 @@
-<?php
-include 'AVConfig.php';
-include 'AVObject.php';
-include 'AVQuery.php';
-include 'AVUser.php';
-include 'AVFile.php';
-include 'AVPush.php';
-include 'AVGeoPoint.php';
-include 'AVACL.php';
-include 'AVCloud.php';
+<?php namespace leancloudsdk;
+require_once( 'AVConfig.php' );
+require_once( 'AVObject.php' );
+require_once( 'AVQuery.php' );
+require_once( 'AVUser.php' ) ;
+require_once( 'AVFile.php' );
+require_once( 'AVPush.php' );
+require_once( 'AVGeoPoint.php' );
+require_once( 'AVACL.php' );
+require_once( 'AVCloud.php' );
 
 class AVRestClient{
 
@@ -47,11 +47,15 @@ class AVRestClient{
 	 */
 	public function request($args){
 		$isFile = false;
+		$cacert = getcwd().'/cacert.pem'; // download cacert.pem from http://curl.haxx.se/docs/caextract.html and paste it in this folder
 		$c = curl_init();
 		curl_setopt($c, CURLOPT_TIMEOUT, 30);
 		curl_setopt($c, CURLOPT_USERAGENT, 'AVOSCloud.com-php-library/2.0');
 		curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($c, CURLINFO_HEADER_OUT, true);
+		curl_setopt($c, CURLOPT_SSL_VERIFYPEER, true); // enable using SSL to access https
+		curl_setopt($c, CURLOPT_CAINFO, $cacert);
+		curl_setopt($c, CURLOPT_SSL_VERIFYHOST, 2);
 		if(substr($args['requestUrl'],0,5) == 'files'){
 			curl_setopt($c, CURLOPT_HTTPHEADER, array(
 				'Content-Type: '.$args['contentType'],
