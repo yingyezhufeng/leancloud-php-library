@@ -1,4 +1,4 @@
-<?php
+<?php namespace leancloudsdk;
 
 class AVQueryTest extends \Enhance\TestFixture {
 

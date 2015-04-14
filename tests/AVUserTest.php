@@ -1,9 +1,9 @@
-<?php
+<?php namespace leancloudsdk;
 class AVUserTest extends \Enhance\TestFixture {
-	
+
 	public $AVUser;
 	public $testUser;
-	
+
 	public function setUp(){
 		$this->AVUser = new AVUser;
 		$this->testUser = array(
@@ -12,7 +12,7 @@ class AVUserTest extends \Enhance\TestFixture {
 			'email' => 'testUser@AV.com',
 			'customField' => 'customValue'
 		);
-		
+
 	}
 
 	public function signupWithTestuserExpectObjectId(){
@@ -42,7 +42,7 @@ class AVUserTest extends \Enhance\TestFixture {
 		$deleteUser->delete((string)$return->objectId,(string)$return->sessionToken);
 
 		\Enhance\Assert::isTrue( property_exists($return,'objectId') );
-		
+
 	}
 
 	public function loginWithUsernameAndPasswordExpectObjectId(){
@@ -57,7 +57,7 @@ class AVUserTest extends \Enhance\TestFixture {
 		$loginUser->password = $this->testUser['password'];
 
 		$returnLogin = $loginUser->login();
-	
+
 		$deleteUser = new AVUser;
 		$deleteUser->delete((string)$return->objectId,(string)$return->sessionToken);
 
@@ -92,12 +92,12 @@ class AVUserTest extends \Enhance\TestFixture {
 		$testUser = new AVUser;
 		$testUser->username = $this->testUser['username'];
 		$testUser->password = $this->testUser['password'];
-		
+
 		$user = $testUser->signup();
-		
+
 		$AVUser = $this->AVUser;
 		$return = $AVUser->delete($user->objectId,$user->sessionToken);
-		
+
 		\Enhance\Assert::isTrue( $return );
 	}
 /*
@@ -107,9 +107,9 @@ class AVUserTest extends \Enhance\TestFixture {
 		$testUser = new AVUser;
 		$testUser->username = $this->testUser['username'];
 		$testUser->password = $this->testUser['password'];
-		
+
 		$user = $testUser->signup();
-		
+
 		$AVUser = new AVUser;
 
 		//These technically don't have to be REAL, unless you want them to actually work :)
@@ -133,15 +133,15 @@ class AVUserTest extends \Enhance\TestFixture {
 				'auth_token_secret' => 'AUTH_TOKEN_SECRET',
 			)
 		));
-		
+
 		$return = $AVUser->linkAccounts($user->objectId,$user->sessionToken);
 
 		\Enhance\Assert::isTrue( $return );
 	}
 
-	
+
 	public function unlinkAccountWith(){
-		
+
 	}
 */
 

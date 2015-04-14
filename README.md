@@ -19,7 +19,7 @@ cd leancloud-php-library ; touch AVConfig.php
 填写AVConfig.php配置示范如下：
 
 ```
-<?php
+<?php namespace leancloudsdk;
 
 class AVConfig{
 
@@ -155,3 +155,7 @@ class AVConfig{
 ```
 	$user->requestPasswordReset('killme2008@gmail.com');
 ```
+
+## 贡献者
+
+* [learningpro](https://github.com/learningpro)

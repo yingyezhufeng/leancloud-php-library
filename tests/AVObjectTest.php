@@ -1,6 +1,6 @@
-<?php
+<?php namespace leancloudsdk;
 class AVObjectTest extends \Enhance\TestFixture {
-	
+
 	private $AVObject;
 
 	public function setUp(){
@@ -27,7 +27,7 @@ class AVObjectTest extends \Enhance\TestFixture {
 
 		\Enhance\Assert::areIdentical('test2', $return->testfield2);
 	}
-	
+
 	public function updateWithObjectIdExpectupdatedAt(){
 		$AVObject = $this->AVObject;
 		$AVObject->testfield2 = $this->testfield2;
@@ -39,14 +39,14 @@ class AVObjectTest extends \Enhance\TestFixture {
 
 		\Enhance\Assert::isTrue( property_exists($return, 'updatedAt') );
 	}
-	
+
 	public function deleteWithObjectIdExpectEmpty(){
 		$AVObject = $this->AVObject;
 		$AVObject->testfield1 = $this->testfield2;
 		$save = $AVObject->save();
 
 		$return = $AVObject->delete($save->objectId);
-		
+
 		\Enhance\Assert::isTrue( $return );
 	}
 
