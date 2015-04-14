@@ -36,7 +36,7 @@ class AVConfig{
 
 你可以通过`php test.php`命令运行单元测试。
 
-所有 AV 开头的类都在 `leancloud` 的 namespace 下。你可以 `leancloud\AVObject` 导入，或者直接 `new leancloud\AVObject` 来使用。
+所有 AV 开头的类都在 `leancloud` 的 namespace 下。你可以 `use leancloud\AVObject;` 导入，或者直接 `new leancloud\AVObject` 来使用。
 
 
 ## 简单例子
