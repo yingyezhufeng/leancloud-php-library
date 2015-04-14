@@ -1,4 +1,4 @@
-<?php namespace leancloudsdk;
+<?php namespace leancloud;
 class AVPushTest extends \Enhance\TestFixture {
 
 	public function setUp(){

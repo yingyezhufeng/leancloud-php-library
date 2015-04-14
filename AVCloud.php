@@ -1,4 +1,4 @@
-<?php namespace leancloudsdk;
+<?php namespace leancloud;
 /*
 	// Adding the possibility to run AV cloud code functions
 	$cloud = new AVCloud("functionName");

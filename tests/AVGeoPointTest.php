@@ -1,4 +1,4 @@
-<?php namespace leancloudsdk;
+<?php namespace leancloud;
 class AVGeoPointTest extends \Enhance\TestFixture {
 	public function setUp(){
 

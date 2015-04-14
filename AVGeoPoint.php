@@ -1,4 +1,4 @@
-<?php namespace leancloudsdk;
+<?php namespace leancloud;
 
 class AVGeoPoint extends AVRestClient{
 

@@ -1,4 +1,4 @@
-<?php namespace leancloudsdk;
+<?php namespace leancloud;
 class AVObjectTest extends \Enhance\TestFixture {
 
 	private $AVObject;

@@ -1,4 +1,4 @@
-<?php namespace leancloudsdk;
+<?php namespace leancloud;
 
 class AVObject extends AVRestClient{
 	public $_includes = array();

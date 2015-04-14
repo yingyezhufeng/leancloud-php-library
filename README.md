@@ -19,7 +19,7 @@ cd leancloud-php-library ; touch AVConfig.php
 填写AVConfig.php配置示范如下：
 
 ```
-<?php namespace leancloudsdk;
+<?php namespace leancloud;
 
 class AVConfig{
 
@@ -35,6 +35,8 @@ class AVConfig{
 其中APPID就是应用Id，MasterKey为应用的Master Key，APPKEY为应用Key。这些信息都可以在应用设置的应用key菜单里找到。
 
 你可以通过`php test.php`命令运行单元测试。
+
+所有 AV 开头的类都在 `leancloud` 的 namespace 下。你可以 `leancloud\AVObject` 导入，或者直接 `new leancloud\AVObject` 来使用。
 
 
 ## 简单例子
@@ -53,7 +55,7 @@ class AVConfig{
 创建对象：
 
 ```
-	$obj = new AVObject('GameScore');
+	$obj = new leancloud\AVObject('GameScore');
 	$obj->score = 1000;
 	$obj->name = 'dennis zhuang';
 	$save = $obj->save();
@@ -63,7 +65,7 @@ class AVConfig{
 更新对象：
 
 ```
-	$updateObject = new AVObject('GameScore');
+	$updateObject = new leancloud\AVObject('GameScore');
 	$updateObject->score = 2000;
 	$return = $updateObject->update($objectId);
 ```
@@ -71,14 +73,14 @@ class AVConfig{
 删除对象：
 
 ```
-	$deleteObject = new AVObject('GameScore');
+	$deleteObject = new leancloud\AVObject('GameScore');
 	$return = $deleteObject->delete($objectId);
 ```
 
 ### 查询
 
 ```
-        $query = new AVQuery('GameScore');
+        $query = new leancloud\AVQuery('GameScore');
     	$query->where('name','dennis zhuang');
 		$return = $query->find();
 		print_r($return);
@@ -91,14 +93,14 @@ class AVConfig{
 上传文件：
 
 ```
-	$file = new AVFile('text/plain', 'Working at AVOS Cloud is Great');
+	$file = new leancloud\AVFile('text/plain', 'Working at AVOS Cloud is Great');
 	$save = $file->save('hello.txt');
 	print_r($save);
 ```
 关联文件到某个对象上：
 
 ```
-    $obj = new AVObject('GameScore');
+    $obj = new leancloud\AVObject('GameScore');
     $obj->image = $obj->dataType('file', $save->objectId);
     $obj->save();
 ```
@@ -106,7 +108,7 @@ class AVConfig{
 ### GeoPoint（地理信息位置）
 
 ```
-	 $geo = new AVGeoPoint(30.0, -20.0);
+	 $geo = new leancloud\AVGeoPoint(30.0, -20.0);
 	 $obj->location = $geo->location;
 	 $return = $obj->save();
 ```
@@ -114,8 +116,8 @@ class AVConfig{
 根据地理位置查询附近的对象：
 
 ```
-	$query = new AVQuery('GameScore');
-	$query->whereNear('location', (new AVGeoPoint(30.0, -20.0))->location);
+	$query = new leancloud\AVQuery('GameScore');
+	$query->whereNear('location', (new leancloud\AVGeoPoint(30.0, -20.0))->location);
 	$return = $query->find();
 ```
 
@@ -124,7 +126,7 @@ class AVConfig{
 推送消息：
 
 ```
-	$push =new AVPush;
+	$push =new leancloud\AVPush;
 	$push->alert = 'Hello from AVOS Cloud';
 	$push->channels = array('foo', 'bar');
 	$return = $push->send();
@@ -135,7 +137,7 @@ class AVConfig{
 注册用户：
 
 ```
-    $avUser = new AVUser;
+    $avUser = new leancloud\AVUser;
     $avUser->email = 'killme2008@gmail.com';
 	$user = $avUser->signup('dennis', 'password');
     print_r($user);
@@ -144,7 +146,7 @@ class AVConfig{
 用户登陆：
 
 ```
-	$loginUser = new AVUser;
+	$loginUser = new leancloud\AVUser;
 	$loginUser->username = 'dennis';
 	$loginUser->password = 'password';
 	$returnLogin = $loginUser->login();

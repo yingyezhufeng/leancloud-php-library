@@ -708,7 +708,7 @@ class CodeCoverageWrapper
     {
         $this->ClassName = $className;
         if ($args !== null) {
-     		$class = "leancloudsdk\\".$className;
+     		$class = "leancloud\\".$className;
             $rc = new \ReflectionClass($class);
             $this->Instance = $rc->newInstanceArgs($args);
         } else {

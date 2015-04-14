@@ -1,4 +1,4 @@
-<?php namespace leancloudsdk;
+<?php namespace leancloud;
 require_once( 'AVConfig.php' );
 require_once( 'AVObject.php' );
 require_once( 'AVQuery.php' );
